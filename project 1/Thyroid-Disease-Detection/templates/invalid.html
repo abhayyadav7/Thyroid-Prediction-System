@@ -1,0 +1,41 @@
+{% extends "index.html" %}
+
+{% block content %}
+<div class="container text-center mt-5">
+
+    <!-- Option 1: Doctor Confused Animation -->
+    <lottie-player 
+        src="https://assets7.lottiefiles.com/private_files/lf30_editor_benhn3ab.json"  
+        background="transparent"  
+        speed="1"  
+        style="width: 250px; height: 250px; margin:auto;"  
+        loop autoplay>
+    </lottie-player>
+
+    <!-- Option 2: Error Alert Animation -->
+    <lottie-player 
+        src="https://assets9.lottiefiles.com/packages/lf20_j1adxtyb.json"  
+        background="transparent"  
+        speed="1"  
+        style="width: 180px; height: 180px; margin:auto;"  
+        loop autoplay>
+    </lottie-player>
+
+    <!-- Glass Styled Error Box -->
+    <div class="glass-box p-4 mt-4 mx-auto" style="max-width:500px;">
+        <h3 class="text-danger font-weight-bold">⚠️ Invalid File!</h3>
+        <p class="lead">Please upload a valid <b>CSV file</b> to continue.</p>
+
+        <a href="/" class="btn btn-primary mt-3">🔙 Back to Home</a>
+    </div>
+
+    <!-- Option 3: Cute Cartoon Animation at bottom -->
+    <lottie-player 
+        src="https://assets5.lottiefiles.com/packages/lf20_touohxv0.json"  
+        background="transparent"  
+        speed="1"  
+        style="width: 200px; height: 200px; margin:20px auto;"  
+        loop autoplay>
+    </lottie-player>
+</div>
+{% endblock content %}

@@ -1,0 +1,25 @@
+{% extends "index.html" %}
+{% block content %}
+<div class="container text-center mt-5">
+
+    <lottie-player 
+        src="https://assets9.lottiefiles.com/packages/lf20_xdfeea13.json"  
+        background="transparent" speed="1"  
+        style="width: 200px; height: 200px; margin:auto;"  
+        loop autoplay>
+    </lottie-player>
+
+    <div class="glass-box p-4 mt-4 mx-auto shadow-lg" style="max-width:600px;">
+        {% if result %}
+            {% if result == "negative" or result == "No" %}
+                <h3 class="text-success">🎉 No Thyroid Disease Detected</h3>
+            {% else %}
+                <h3 class="text-danger">⚠️ You may have {{ result }}</h3>
+            {% endif %}
+        {% else %}
+            <h3 class="text-warning">⚠️ No Result Available</h3>
+        {% endif %}
+    </div>
+
+</div>
+{% endblock content %}

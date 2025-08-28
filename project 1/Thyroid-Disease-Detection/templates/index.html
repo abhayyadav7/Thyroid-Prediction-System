@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Thyroid Disease Prediction | Priyanshu Mishra</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+    <!-- Lottie Animations -->
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            background: url('https://img.freepik.com/free-photo/doctor-with-stethoscope-hospital-background_1421-64.jpg?size=1900&ext=jpg') no-repeat center center/cover;
+            color: #fff;
+            min-height: 100vh;
+            position: relative;
+        }
+        .overlay {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,50,0.65);
+            z-index: -1;
+        }
+        h2.title {
+            font-weight: 700;
+            background: linear-gradient(90deg, #ff7f00, #00c6ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .glass-box {
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+            transition: 0.4s;
+        }
+        .glass-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+        }
+        .btn-primary {
+            background: linear-gradient(45deg,#273582,#ff7f00);
+            border: none;
+            transition: 0.3s;
+        }
+        .btn-primary:hover {
+            transform: scale(1.05) rotate(-1deg);
+            background: linear-gradient(45deg,#ff7f00,#273582);
+        }
+        .result-box {
+            max-height: 260px;
+            overflow-y: auto;
+            text-align: left;
+        }
+        footer {
+            padding: 15px;
+            background: rgba(0,0,0,0.8);
+            color: #ccc;
+            font-size: 14px;
+            margin-top: 20px;
+        }
+        footer a { color: #ff7f00; font-weight: 600; cursor:pointer; }
+        footer a:hover { color: #fff; }
+
+        /* Loader */
+        #loading {
+            position: fixed;
+            top:0; left:0;
+            width:100%; height:100%;
+            background: rgba(0,0,0,0.6);
+            z-index:99999;
+            display:none;
+        }
+        .loader {
+            border: 10px solid #f3f3f3;
+            border-top: 10px solid #ff7f00;
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            margin: 20% auto;
+            animation: spin 1.5s linear infinite;
+        }
+        @keyframes spin {
+            0%{ transform: rotate(0deg);}
+            100%{ transform: rotate(360deg);}
+        }
+    </style>
+</head>
+
+<body>
+    <div class="overlay"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-dark bg-transparent">
+        <div class="container text-center">
+            <h2 class="title">Thyroid Disease Prediction</h2>
+            <p class="text-light">By <b>Priyanshu Mishra</b> | B.Tech CSE, IMS Engineering College Ghaziabad</p>
+        </div>
+    </nav>
+
+    <!-- Prediction Section -->
+    <section class="testimonials text-center">
+        <div class="container">
+            <div class="row justify-content-center">
+
+                <!-- Cartoon / Animation -->
+                <div class="col-md-3 d-none d-md-block">
+                    <lottie-player 
+                        src="https://assets3.lottiefiles.com/packages/lf20_tutvdkg0.json"  
+                        background="transparent"  
+                        speed="1"  
+                        style="width: 100%; height: 300px;"  
+                        loop  
+                        autoplay>
+                    </lottie-player>
+                </div>
+
+                <!-- Upload Form -->
+                <div class="col-md-4 glass-box m-2">
+                    <h4 class="mb-3">Upload CSV File</h4>
+                    <form action="/predict" method="post" id="datafetch_form" enctype="multipart/form-data">
+                        <input type="file" name="csvfile" id="csvfile" class="form-control mb-3" />
+                        <button class="btn btn-primary btn-block" type="submit" name="submit">Predict</button>
+                    </form>
+                    <hr class="bg-light">
+                    <h6>Download Sample CSV</h6>
+                    <a class="btn btn-primary btn-block" href="return_sample_file/" download="sample_file.csv">Download</a>
+                </div>
+
+                <!-- Results -->
+                <div class="col-md-4 glass-box m-2">
+                    <h4 class="mb-3">Results</h4>
+                    <div class="result-box json-result shadow-sm p-3 rounded">
+                        <p>Upload a file to see predictions...</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-center">
+        <p>&copy; 2025 | Project by <b>Priyanshu Mishra</b></p>
+        <a data-toggle="modal" data-target="#aboutModal">About</a> | 
+        <a href="https://www.linkedin.com/in/codewithpriyanshu/" target="_blank">Contact</a>
+    </footer>
+
+    <!-- About Modal -->
+    <div class="modal fade" id="aboutModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content text-dark p-4">
+          <h4>About Me</h4>
+          <p><b>Name:</b> Priyanshu Mishra</p>
+          <p><b>College:</b> IMS Engineering College, Ghaziabad</p>
+          <p><b>Branch:</b> B.Tech in Computer Science Engineering</p>
+          <p><b>Project:</b> Thyroid Disease Prediction using Machine Learning & Flask</p>
+          <p><b>LinkedIn:</b> <a href="https://www.linkedin.com/in/codewithpriyanshu/" target="_blank">Click Here</a></p>
+          <button class="btn btn-primary mt-3" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Loader -->
+    <div id="loading"><div class="loader"></div></div>
+
+    <!-- jQuery + Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('#loading').hide();
+            $("#datafetch_form").submit(function(){
+                $('#loading').show();
+            });
+        });
+    </script>
+</body>
+</html>
